@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECLC Visual Preview</title>
+  <style>
+    :root {
+      --burgundy: #651625;
+      --deep: #3f0d18;
+      --cream: #f8efdf;
+      --gold: #d8a441;
+      --ink: #2f1b16;
+      --card: #fff9ef;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background: #f3ead9;
+    }
+    .site {
+      max-width: 1150px;
+      margin: 0 auto;
+      background: var(--cream);
+      box-shadow: 0 12px 40px rgba(0,0,0,.14);
+    }
+    .hero {
+      background: radial-gradient(circle at top, #7a2132, var(--deep));
+      color: #fff6e9;
+      border-bottom: 8px solid var(--gold);
+      padding: 22px 22px 10px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .mascot-box, .hero-center {
+      background: linear-gradient(180deg, #fff8ea, #f4e3c2);
+      border: 4px solid #cfab67;
+      border-radius: 26px;
+      min-height: 230px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mascot {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 92px;
+    }
+    .hero-center {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 14px;
+    }
+    .crest {
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: #f7ebd6;
+      border: 5px solid #d5b37b;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      color: var(--burgundy);
+    }
+    .crest h1 {
+      margin: 0;
+      font-size: 64px;
+      line-height: 1;
+    }
+    .crest small {
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      font-size: 10px;
+    }
+    .brand {
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 700;
+      line-height: .95;
+      text-transform: uppercase;
+      color: #fff4df;
+      text-align: center;
+      margin: 14px 0 0;
+    }
+    .sub-brand {
+      margin: 8px 0 12px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: .25em;
+      font-size: 12px;
+      color: #f2d39f;
+    }
+    .pillbar {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin: 8px 0 0;
+    }
+    .pill {
+      background: #5b1120;
+      border: 1px solid #8f4050;
+      color: #fceccf;
+      border-radius: 999px;
+      padding: 9px 10px;
+      text-align: center;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-weight: 700;
+    }
+    .pill:last-child { background: #f0d7aa; color: #52111f; }
+
+    .section {
+      margin: 12px;
+      border: 1px solid #e8d8ba;
+      border-radius: 20px;
+      background: var(--card);
+      overflow: hidden;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 0;
+    }
+    .photo {
+      min-height: 330px;
+      background: linear-gradient(145deg, #b39265, #f5e3c4);
+      display: grid;
+      place-items: center;
+      color: #5a1a24;
+      font-size: 42px;
+      font-weight: 700;
+    }
+    .content {
+      padding: 28px;
+    }
+    .content h2 {
+      margin: 0;
+      color: #5a1320;
+      font-size: clamp(30px, 3.2vw, 52px);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .content h3 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      color: #7b4b2a;
+      font-style: italic;
+      font-weight: 500;
+    }
+    .features {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .feat {
+      background: #fff;
+      border: 1px solid #ebd9bb;
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .feat b { display: block; color: var(--burgundy); margin-bottom: 4px; }
+
+    .blaze {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      background: linear-gradient(90deg, #5a0e1d 0%, #5a0e1d 42%, #f2e1c2 42%, #f2e1c2 100%);
+      color: #fff3df;
+    }
+    .blaze-left { padding: 26px; }
+    .blaze-left h2 {
+      margin: 0;
+      font-size: 66px;
+      line-height: .88;
+      color: #ffe8ba;
+    }
+    .blaze-left p { font-size: 24px; margin: 6px 0 14px; }
+    .tagrow { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag {
+      border: 1px solid #9b4f5f;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(255,255,255,.05);
+    }
+    .blaze-right {
+      color: #4f1220;
+      padding: 18px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    .horse {
+      font-size: 150px;
+      line-height: 1;
+      margin: 8px 0;
+    }
+    .room {
+      font-size: 54px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 10px;
+    }
+    .panel {
+      border: 1px solid #ead5b2;
+      border-radius: 16px;
+      padding: 16px;
+      background: #fffaf0;
+      min-height: 220px;
+    }
+    .panel h4 {
+      margin: 0 0 10px;
+      color: #5d1220;
+      font-size: 34px;
+      line-height: .95;
+      text-transform: uppercase;
+    }
+    .panel ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.6;
+    }
+    .promo {
+      background: #fff;
+      border: 2px solid #e7d1aa;
+      text-align: center;
+    }
+    .promo .code {
+      margin: 10px auto;
+      display: inline-block;
+      background: #651625;
+      color: #fff7e8;
+      padding: 8px 24px;
+      border-radius: 8px;
+      letter-spacing: .07em;
+      font-weight: 700;
+      font-size: 30px;
+    }
+    footer {
+      background: #5a0f1f;
+      color: #fceccf;
+      text-align: center;
+      padding: 12px;
+      letter-spacing: .05em;
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .two-col, .blaze, .bottom { grid-template-columns: 1fr; }
+      .pillbar { grid-template-columns: 1fr 1fr; }
+      .features { grid-template-columns: 1fr 1fr; }
+      .blaze-left h2 { font-size: 46px; }
+      .content h2 { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="mascot-box"><div class="mascot">🐼</div></div>
+        <div class="hero-center">
+          <div class="crest">
+            <div>
+              <small>Elite Children Learning Center</small>
+              <h1>ECLC</h1>
+              <small>Love • Education • Unity</small>
+            </div>
+          </div>
+          <div class="brand">Elite Children<br/>Learning Center</div>
+          <div class="sub-brand">Love • Education • Unity</div>
+        </div>
+        <div class="mascot-box"><div class="mascot">🐼</div></div>
+      </div>
+      <div class="pillbar">
+        <div class="pill">Nurturing Hearts</div>
+        <div class="pill">Building Minds</div>
+        <div class="pill">Stronger Together</div>
+        <div class="pill">Shaping Futures</div>
+        <div class="pill">Enroll Today. Empower Tomorrow.</div>
+      </div>
+    </section>
+
+    <section class="section two-col">
+      <div class="photo">ECLC</div>
+      <div class="content">
+        <h3>Welcome to</h3>
+        <h2>Elite Children<br/>Learning Center</h2>
+        <p>At ECLC, we believe every child is a gift with endless potential. Our mission is to provide a safe, loving, and stimulating environment where children learn, grow, and thrive academically, socially, and emotionally.</p>
+        <div class="features">
+          <div class="feat"><b>Nurturing Hearts</b>We care for every child like family.</div>
+          <div class="feat"><b>Building Minds</b>We inspire curiosity and a love for learning.</div>
+          <div class="feat"><b>Stronger Together</b>We partner with families for lifelong success.</div>
+          <div class="feat"><b>Shaping Futures</b>We prepare children to be confident leaders.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section blaze">
+      <div class="blaze-left">
+        <h2>Meet Blaze<br/>the Horse</h2>
+        <p>The One's Classroom Mascot</p>
+        <div class="tagrow">
+          <span class="tag">Trust</span>
+          <span class="tag">Movement</span>
+          <span class="tag">Discovery</span>
+        </div>
+      </div>
+      <div class="blaze-right">
+        <div class="room">Red House</div>
+        <div class="horse">🐴</div>
+      </div>
+    </section>
+
+    <section class="bottom">
+      <article class="panel">
+        <h4>Purpose Pasture Hall</h4>
+        <p>Our One's classroom is where little explorers begin their learning journey. We focus on creating a warm, nurturing, and engaging environment.</p>
+        <ul>
+          <li>Age Group: 1-2 years old</li>
+          <li>Class Size: Maximum 10 students</li>
+          <li>Schedule: 8:30 AM - 2:30 PM</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h4>What We Do</h4>
+        <ul>
+          <li>Hands-on learning activities</li>
+          <li>Story time and circle time</li>
+          <li>Creative arts and crafts</li>
+          <li>Sensory play and exploration</li>
+          <li>Building social skills and confidence</li>
+          <li>Encouraging independence</li>
+        </ul>
+      </article>
+      <article class="panel promo">
+        <h4>New Enrollees Can Get</h4>
+        <p style="font-size:42px;line-height:.95;margin:8px 0;color:#651625;"><b>1 FREE</b><br/>ELITE UNIFORM</p>
+        <p>when they use the teacher's referral code:</p>
+        <div class="code">RED10</div>
+        <p>Register online or schedule a tour.</p>
+      </article>
+    </section>
+
+    <footer>ECLC • LOVE • EDUCATION • UNITY</footer>
+  </main>
+</body>
+</html>
